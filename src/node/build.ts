@@ -2,8 +2,10 @@ import MarkdownIt from 'markdown-it'
 import fs from 'fs'
 import { resolve } from 'path'
 import { globby } from 'globby'
+import colors from 'picocolors'
 
 export async function build (source: string) {
+  console.log(colors.cyan(`Building from source: ${source}`))
   const md = MarkdownIt({
     html: true,
     linkify: true,

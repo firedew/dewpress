@@ -1,8 +1,5 @@
-// import colors from 'picocolors'
 import { Command } from 'commander'
 import { build } from './build'
-
-// console.log(colors.cyan(`DewPress v${require('../../package.json').version}`))
 
 const program = new Command()
 
