@@ -16,7 +16,7 @@ export async function build (source: string) {
       cwd: source,
     })
   ).sort()
-  // const dir = fs.readdirSync(source)
+
   console.log(pages)
   pages.forEach((page) => {
     const content = fs.readFileSync(resolve(source, page), { encoding: 'utf-8' })
