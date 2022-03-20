@@ -1,7 +1,7 @@
 {
   "name": "dewpress",
   "version": "0.0.1",
-  "description": "Vue3 based SSG using markdown",
+  "description": "Vue based ssg using markdown",
   "bin": {
     "dewpress": "bin/dewpress.js"
   },
@@ -16,10 +16,10 @@
     "url": "git+https://github.com/firedew/dewpress.git"
   },
   "keywords": [
-    "Vue",
-    "Vue3",
-    "SSG",
-    "Markdown"
+    "vue",
+    "vue3",
+    "ssg",
+    "markdown"
   ],
   "files": [
     "bin",
