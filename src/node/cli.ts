@@ -1,5 +1,8 @@
 import { Command } from 'commander'
 import { build } from './build'
+import colors from 'picocolors'
+
+console.log(colors.cyan(`dewpress v${require('../../package.json').version}`))
 
 const program = new Command()
 
@@ -11,7 +14,7 @@ program
   .command('build [source]')
   .description('build website, source defaults to src')
   .action((source = 'src') => {
-    build(source)
+    build(source, 'dist')
   });
 
 program.parse(process.argv)

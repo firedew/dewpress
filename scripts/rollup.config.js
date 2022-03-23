@@ -20,5 +20,6 @@ export default defineConfig({
       target: 'node12'
     }),
     json()
-  ]
+  ],
+  external: ['node:fs', 'node:path', 'node:process', 'node:url', 'node:stream'],
 })
