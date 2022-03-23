@@ -14,7 +14,7 @@ program
   .command('build [source]')
   .description('build website, source defaults to src')
   .action((source = 'src') => {
-    build(source, 'dist')
+    build(source, 'dist-docs')
   });
 
 program.parse(process.argv)

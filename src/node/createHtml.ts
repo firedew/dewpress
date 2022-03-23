@@ -1,7 +1,7 @@
 import path from 'path'
-import fs from 'fs'
+import fs from 'fs-extra'
 
-export default function (content: any, { dest, page }: any) {
+export default async function (content: any, { dest, page }: any) {
   const title = 'My first title'
   const siteData = {
     lang: 'en',
@@ -23,8 +23,6 @@ export default function (content: any, { dest, page }: any) {
   </body>
 </html>`.trim()
   const htmlFileName = path.join(dest, page.replace(/\.md$/, '.html'))
-  if (!fs.existsSync(dest)) {
-    fs.mkdirSync(dest)
-  }
-  fs.writeFileSync(htmlFileName, html)
+  await fs.ensureDir(path.dirname(htmlFileName))
+  await fs.writeFile(htmlFileName, html)
 }
