@@ -6,6 +6,7 @@
     "dewpress": "bin/dewpress.js"
   },
   "scripts": {
+    "dewpress": "node ./dist/node/cli.js",
     "dev-node": "rollup -w -c scripts/rollup.config.js",
     "build": "run-s build-prepare build-node",
     "build-prepare": "rimraf -rf dist",

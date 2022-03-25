@@ -53,9 +53,9 @@ async function resolveUserConfig(
     : {}
 
   if (configPath) {
-    log.info(`loaded config at ${configPath}`)
+    log.warning(`loaded config at ${configPath}`)
   } else {
-    log.info(`no config file found.`)
+    log.warning(`no config file found.`)
   }
 
   return [await resolveConfigExtends(userConfig), configPath]
@@ -67,7 +67,6 @@ export async function resolveConfig(
   mode = 'development'
 ): Promise<SiteConfig> {
   const [userConfig] = await resolveUserConfig(root, command, mode);
-  console.log(userConfig)
   const srcDir = path.resolve(root, userConfig.srcDir || '.')
   const outDir = userConfig.outDir
     ? path.resolve(root, userConfig.outDir)
