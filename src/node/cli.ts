@@ -1,8 +1,7 @@
 import { Command } from 'commander'
 import { build } from './build'
-import colors from 'picocolors'
-
-console.log(colors.cyan(`dewpress v${require('../../package.json').version}`))
+import { preview } from './preview'
+import defaults from './defaults'
 
 const program = new Command()
 
@@ -11,10 +10,19 @@ program
   .version(require('../../package.json').version)
 
 program
-  .command('build [source]')
-  .description('build website, source defaults to src')
-  .action((source = 'src') => {
-    build(source, 'dist-docs')
+  .command('build [source] [dest]')
+  .description(`build website, source defaults to ${defaults.source} and dest defaults to [source]/${defaults.dest}`)
+  .action(async (source: string, dest: string) => {
+    await build(source, dest)
+  });
+
+program
+  .command('preview [source] [dest]')
+  .option('-p, --port <port>', 'Port to start the server on')
+  .option('--skip-open', 'Skip opening browser')
+  .description(`preview the website, source defaults to ${defaults.source} and dest defaults to [source]/${defaults.dest}`)
+  .action(async (source: string, dest: string, options) => {
+    await preview(source, dest, options)
   });
 
 program.parse(process.argv)

@@ -1,13 +1,17 @@
 import MarkdownIt from 'markdown-it'
 import fs from 'fs-extra'
-import { resolve } from 'path'
+import { resolve, join } from 'path'
 import { globby } from 'globby'
 import colors from 'picocolors'
 import createHtml from './createHtml'
+import log from './utils/log'
+import defaults from './defaults'
 
 export async function build (source: string, dest: string) {
   const start = Date.now()
-  console.log(`Building from source: ${source}`)
+  log.version();
+  dest = dest || join(source, defaults.dest)
+  console.log(`Building from source: ${source} to ${dest}`)
 
   const md = MarkdownIt({
     html: true,

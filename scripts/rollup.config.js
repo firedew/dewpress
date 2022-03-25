@@ -6,6 +6,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 
 const resolveFromRoot = (path) => resolve(__dirname, '../', path)
+const pkg = require('../package.json')
 
 export default defineConfig({
   input: [resolveFromRoot('src/node/cli.ts')],
@@ -21,5 +22,5 @@ export default defineConfig({
     }),
     json()
   ],
-  external: ['node:fs', 'node:path', 'node:process', 'node:url', 'node:stream'],
+  external: [...Object.keys(pkg.dependencies), 'node:fs', 'node:path', 'node:process', 'node:url', 'node:stream'],
 })

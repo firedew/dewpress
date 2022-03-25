@@ -1,21 +1,24 @@
 {
   "name": "dewpress",
   "version": "0.0.1",
-  "description": "Vue based ssg using markdown",
+  "description": "Vue and Vite based ssg using markdown",
   "bin": {
     "dewpress": "bin/dewpress.js"
   },
   "scripts": {
+    "dev-node": "rollup -w -c scripts/rollup.config.js",
     "build": "run-s build-prepare build-node",
     "build-prepare": "rimraf -rf dist",
     "build-node": "rollup -c scripts/rollup.config.js",
-    "docs": "node ./dist/node/cli.js build docs"
+    "docs": "node ./dist/node/cli.js build docs",
+    "docs-preview": "node ./dist/node/cli.js preview docs"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/firedew/dewpress.git"
   },
   "keywords": [
+    "vite",
     "vue",
     "vue3",
     "ssg",
@@ -34,13 +37,16 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "vite": "^2.8.6"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "21.0.3",
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "13.1.3",
     "@types/fs-extra": "9.0.13",
     "@types/markdown-it": "12.2.3",
+    "chokidar": "^3.5.3",
     "commander": "9.1.0",
     "esbuild": "0.14.27",
     "fs-extra": "10.0.1",
