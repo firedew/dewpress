@@ -1,10 +1,14 @@
-import { PreviewOptions } from 'vite'
+import { UserConfig } from 'vite'
 
-export default {
-  source: 'src',
-  dest: '.dewpress/dist',
+const defaultUserConfig: UserConfig = {
+  root: 'src',
+  build: {
+    outDir: '.dewpress/dist'
+  },
   preview: {
     port: 3000,
     open: true,
-  } as PreviewOptions
+  }
 }
+
+export default defaultUserConfig

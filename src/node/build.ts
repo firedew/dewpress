@@ -1,17 +1,18 @@
 import MarkdownIt from 'markdown-it'
 import fs from 'fs-extra'
-import { resolve, join } from 'path'
+import { resolve } from 'path'
 import { globby } from 'globby'
 import colors from 'picocolors'
 import createHtml from './createHtml'
 import log from './utils/log'
-import defaults from './defaults'
+import { resolveConfig } from './config'
 
-export async function build (source: string, dest: string) {
+export async function build (root: string) {
   const start = Date.now()
   log.version();
-  dest = dest || join(source, defaults.dest)
-  console.log(`Building from source: ${source} to ${dest}`)
+  const config = await resolveConfig(root, 'build', 'development')
+
+  console.log(`Building from source: ${root} to ${config.outDir}`)
 
   const md = MarkdownIt({
     html: true,
@@ -20,16 +21,16 @@ export async function build (source: string, dest: string) {
 
   const pages = (
     await globby(['**.md'], {
-      cwd: source,
+      cwd: root,
     })
   ).sort()
 
   await Promise.all(
     pages.map(async (page) => {
-      const fileContent = await fs.readFile(resolve(source, page), { encoding: 'utf-8' })
+      const fileContent = await fs.readFile(resolve(root, page), { encoding: 'utf-8' })
       const content = md.render(fileContent)
 
-      await createHtml(content, { dest, page })
+      await createHtml(content, { outDir: config.outDir, page })
     })
   )
 

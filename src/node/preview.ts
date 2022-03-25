@@ -1,30 +1,28 @@
-import { createServer as createViteServer } from 'vite'
-import path, { join } from 'path'
+import { preview as createViteServer } from 'vite'
 import defaults from './defaults'
 import log from './utils/log'
 import { DewPreviewOptions } from './types'
+import { resolveConfig } from './config'
 
-export async function preview (source: string, dest: string, previewOptions: DewPreviewOptions) {
+export async function preview (root: string, previewOptions: DewPreviewOptions) {
   log.version()
   previewOptions = {
     ...defaults.preview,
     ...previewOptions,
     ...(previewOptions.skipOpen && { open: false })
   }
+  const config = await resolveConfig(root, 'build', 'development')
 
-  dest = dest || join(source, defaults.dest)
-
-  const root = path.resolve(dest)
   const server = await createViteServer({
-    configFile: false,
     root,
+    build: {
+      outDir: config.outDir,
+    },
     // base: config.site.base,
     // logLevel: 'warn',
     // plugins: createVitePressPlugin(root, config),
-    server: previewOptions
+    preview: previewOptions
   })
-
-  await server.listen()
 
   server.printUrls()
 }

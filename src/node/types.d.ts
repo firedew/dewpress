@@ -1,5 +1,5 @@
-import { ServerOptions } from 'vite'
+import { PreviewOptions } from 'vite'
 
-export interface DewPreviewOptions extends ServerOptions {
+export interface DewPreviewOptions extends PreviewOptions {
   skipOpen?: boolean
 }

@@ -10,19 +10,19 @@ program
   .version(require('../../package.json').version)
 
 program
-  .command('build [source] [dest]')
-  .description(`build website, source defaults to ${defaults.source} and dest defaults to [source]/${defaults.dest}`)
-  .action(async (source: string, dest: string) => {
-    await build(source, dest)
+  .command('build [root]')
+  .description(`build website, root defaults to ${defaults.root}`)
+  .action(async (root: string) => {
+    await build(root)
   });
 
 program
-  .command('preview [source] [dest]')
+  .command('preview [root]')
   .option('-p, --port <port>', 'Port to start the server on')
   .option('--skip-open', 'Skip opening browser')
-  .description(`preview the website, source defaults to ${defaults.source} and dest defaults to [source]/${defaults.dest}`)
-  .action(async (source: string, dest: string, options) => {
-    await preview(source, dest, options)
+  .description(`preview the website, root defaults to ${defaults.root}`)
+  .action(async (root: string, options) => {
+    await preview(root, options)
   });
 
 program.parse(process.argv)
