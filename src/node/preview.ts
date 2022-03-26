@@ -1,13 +1,13 @@
 import { preview as createViteServer } from 'vite'
-import defaults from './defaults'
+import { defaultViteConfig } from './config/defaults'
 import log from './utils/log'
 import { DewPreviewOptions } from './types'
-import { resolveConfig } from './config'
+import { resolveConfig } from './config/config'
 
 export async function preview (root: string, previewOptions: DewPreviewOptions) {
   log.version()
   previewOptions = {
-    ...defaults.preview,
+    ...defaultViteConfig.preview,
     ...previewOptions,
     ...(previewOptions.skipOpen && { open: false })
   }

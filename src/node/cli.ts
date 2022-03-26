@@ -1,7 +1,7 @@
 import { Command } from 'commander'
 import { build } from './build'
 import { preview } from './preview'
-import defaults from './defaults'
+import { defaultDewConfig } from './config/defaults'
 
 const program = new Command()
 
@@ -10,19 +10,19 @@ program
   .version(require('../../package.json').version)
 
 program
-  .command('build [root]')
-  .description(`build website, root defaults to ${defaults.root}`)
-  .action(async (root: string) => {
-    await build(root)
+  .command('build [srcDir]')
+  .description(`build website, srcDir defaults to ${defaultDewConfig.srcDir}`)
+  .action(async (srcDir: string) => {
+    await build(srcDir)
   });
 
 program
-  .command('preview [root]')
+  .command('preview [srcDir]')
   .option('-p, --port <port>', 'Port to start the server on')
   .option('--skip-open', 'Skip opening browser')
-  .description(`preview the website, root defaults to ${defaults.root}`)
-  .action(async (root: string, options) => {
-    await preview(root, options)
+  .description(`preview the website, srcDir defaults to ${defaultDewConfig.srcDir}`)
+  .action(async (srcDir: string, options) => {
+    await preview(srcDir, options)
   });
 
 program.parse(process.argv)

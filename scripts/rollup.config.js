@@ -23,4 +23,7 @@ export default defineConfig({
     json()
   ],
   external: [...Object.keys(pkg.dependencies), 'node:fs', 'node:path', 'node:process', 'node:url', 'node:stream'],
+  onwarn(warning, warn) {
+    if (warning.code !== 'EVAL') warn(warning)
+  }
 })

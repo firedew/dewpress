@@ -2,22 +2,12 @@ import path from 'path'
 import fs from 'fs-extra'
 import {
   normalizePath,
-  UserConfig as ViteConfig,
   mergeConfig as mergeViteConfig,
   loadConfigFromFile
 } from 'vite'
-import log from './utils/log'
-
-export interface UserConfig extends ViteConfig {
-  srcDir: string
-  outDir: string
-}
-
-export interface SiteConfig {
-  root: string
-  srcDir: string
-  outDir: string
-}
+import log from '../utils/log'
+import { DewUserConfig } from '../types'
+import { defaultDewConfig } from './defaults'
 
 const resolve = (root: string, file: string) =>
   normalizePath(path.resolve(root, `.dewpress`, file))
@@ -28,7 +18,7 @@ async function resolveUserConfig(
   root: string,
   command: 'serve' | 'build',
   mode: string
-): Promise<[UserConfig, string | undefined]> {
+): Promise<[DewUserConfig, string | undefined]> {
   // load user config
   let configPath
   for (const ext of supportedConfigExtensions) {
@@ -65,17 +55,16 @@ export async function resolveConfig(
   root: string = process.cwd(),
   command: 'serve' | 'build' = 'serve',
   mode = 'development'
-): Promise<SiteConfig> {
+): Promise<DewUserConfig> {
   const [userConfig] = await resolveUserConfig(root, command, mode);
-  const srcDir = path.resolve(root, userConfig.srcDir || '.')
-  const outDir = userConfig.outDir
+  userConfig.srcDir = path.resolve(root, userConfig.srcDir || '.')
+  userConfig.outDir = userConfig.outDir
     ? path.resolve(root, userConfig.outDir)
     : resolve(root, 'dist')
 
   return {
-    root,
-    srcDir,
-    outDir
+    ...defaultDewConfig,
+    ...userConfig
   }
 }
 
@@ -83,19 +72,19 @@ export async function resolveConfig(
 async function resolveConfigExtends(
   config: any
 
-): Promise<UserConfig> {
+): Promise<DewUserConfig> {
   const resolved = await (typeof config === 'function' ? config() : config)
   if (resolved.extends) {
     const base = await resolveConfigExtends(resolved.extends)
-    return mergeConfig(base, resolved) as UserConfig
+    return mergeConfig(base, resolved) as DewUserConfig
   }
   return resolved
 }
 
-function mergeConfig(a: UserConfig, b: UserConfig, isRoot = true) {
+function mergeConfig(a: DewUserConfig, b: DewUserConfig, isRoot = true) {
   const merged: Record<string, any> = { ...a }
   for (const key in b) {
-    const value = b[key as keyof UserConfig]
+    const value = b[key as keyof DewUserConfig]
     if (value == null) {
       continue
     }
@@ -108,7 +97,7 @@ function mergeConfig(a: UserConfig, b: UserConfig, isRoot = true) {
       if (isRoot && key === 'vite') {
         merged[key] = mergeViteConfig(existing, value)
       } else {
-        merged[key] = mergeConfig(existing as UserConfig, value as UserConfig, false)
+        merged[key] = mergeConfig(existing as DewUserConfig, value as DewUserConfig, false)
       }
       continue
     }

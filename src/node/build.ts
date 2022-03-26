@@ -5,14 +5,15 @@ import { globby } from 'globby'
 import colors from 'picocolors'
 import createHtml from './createHtml'
 import log from './utils/log'
-import { resolveConfig } from './config'
+import matter from 'gray-matter'
+import { resolveConfig } from './config/config'
 
 export async function build (root: string) {
   const start = Date.now()
   log.version();
   const config = await resolveConfig(root, 'build', 'development')
 
-  console.log(`Building from source: ${root} to ${config.outDir}`)
+  console.log(`Building from source: ${config.srcDir} to ${config.outDir}`)
 
   const md = MarkdownIt({
     html: true,
@@ -21,16 +22,17 @@ export async function build (root: string) {
 
   const pages = (
     await globby(['**.md'], {
-      cwd: root,
+      cwd: config.srcDir,
     })
   ).sort()
 
   await Promise.all(
     pages.map(async (page) => {
-      const fileContent = await fs.readFile(resolve(root, page), { encoding: 'utf-8' })
-      const content = md.render(fileContent)
+      const fileContent = await fs.readFile(resolve(config.srcDir!, page), { encoding: 'utf-8' })
+      const processedContent = matter(fileContent)
+      const content = md.render(processedContent.content)
 
-      await createHtml(content, { outDir: config.outDir, page })
+      await createHtml(content, { config, page, data: processedContent.data })
     })
   )
 
