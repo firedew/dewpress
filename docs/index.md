@@ -1,6 +1,3 @@
----
-title: DewPress
----
 # DewPress
 
 Welcome to DewPress, the Jamstack inspired Static Site Generator based on Vite and Markdown.

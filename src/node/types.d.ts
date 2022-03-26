@@ -4,6 +4,14 @@ export interface DewPreviewOptions extends PreviewOptions {
   skipOpen?: boolean
 }
 
+export interface DewHeadOptions {
+  /**
+   * Website raw head content. This value will be added to as is in the <head> on each generated page.
+   * @default empty
+   */
+  raw?: string
+}
+
 export declare interface DewUserConfig {
   /**
    * Website language  <html lang="...">
@@ -31,4 +39,9 @@ export declare interface DewUserConfig {
    * @default .dewpress/dist
    */
   outDir?: string
+  /**
+   * Website head options. Will be added to <head> on each generated page.
+   * @default empty
+   */
+  head?: DewHeadOptions
 }

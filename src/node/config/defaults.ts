@@ -7,6 +7,8 @@ const defaultDewConfig: DewUserConfig = {
   outDir: '.dewpress/dist',
   title: 'DewPress',
   description: 'My awesome DewPress website',
+  head: {
+  }
 }
 
 const defaultViteConfig: UserConfig = {
