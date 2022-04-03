@@ -7,6 +7,7 @@ import createHtml from './createHtml'
 import log from './utils/log'
 import matter from 'gray-matter'
 import { resolveConfig } from './config/config'
+import { copyAssets } from './assets'
 
 export async function build (root: string) {
   const start = Date.now()
@@ -36,5 +37,6 @@ export async function build (root: string) {
     })
   )
 
+  await copyAssets(config)
   console.log(colors.green(`build complete in ${((Date.now() - start) / 1000).toFixed(2)}s.`))
 }
