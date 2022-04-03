@@ -129,3 +129,5 @@ This should open your default browser and show you the content of your root inde
 DewPress does not yet support hot reload, but this will be enabled in future releases. For now you will
 need to build again on changes and refresh in the browser. The `preview` command will keep the server open, so
 you only need to run this once. But you do need to refresh the page after each `build` command.
+
+[Home](/)
