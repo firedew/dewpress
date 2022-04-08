@@ -2,14 +2,14 @@
 title: Getting started
 ---
 # Getting started
-Install DewPress as an npm dependency.
+Install DewPress as a npm dependency.
 
 ```bash
 # yarn
 yarn add -D dewpress
 
 # npm
-npm i -D dewpress
+npm install -D dewpress
 ```
 
 You may also install it globally to be used as a CLI anywhere. This is not the recommended way, it is generally better
