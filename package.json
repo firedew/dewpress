@@ -8,6 +8,7 @@
   "scripts": {
     "dewpress": "node ./dist/node/cli.js",
     "dev-node": "rollup -w -c scripts/rollup.config.js",
+    "dev-client": "tsc -w -p src/client",
     "build": "run-s build-prepare build-node",
     "build-prepare": "rimraf -rf dist",
     "build-node": "rollup -c scripts/rollup.config.js",

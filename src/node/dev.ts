@@ -1,5 +1,5 @@
 import { createServer as createViteServer, ServerOptions } from 'vite'
-import dewPressPlugin from './plugin'
+import dewPressPlugin from './dewPressPlugin'
 import { resolveConfig } from './config/config'
 
 export async function dev(

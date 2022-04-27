@@ -1,13 +1,9 @@
-import MarkdownIt from 'markdown-it'
-import fs from 'fs-extra'
-import { resolve } from 'path'
 import colors from 'picocolors'
-import createHtml from './createHtml'
 import log from './utils/log'
-import matter from 'gray-matter'
 import { resolveConfig } from './config/config'
 import { copyAssets } from './assets'
 import { getPages } from './pages'
+import parseMarkdownFile from './markdown/parseMarkdownFile'
 
 export async function build (root: string) {
   const start = Date.now()
@@ -17,18 +13,9 @@ export async function build (root: string) {
 
   console.log(`Building from source: ${config.srcDir} to ${config.outDir}`)
 
-  const md = MarkdownIt({
-    html: true,
-    linkify: true,
-  })
-
   await Promise.all(
     pages.map(async (page) => {
-      const fileContent = await fs.readFile(resolve(config.srcDir!, page), { encoding: 'utf-8' })
-      const processedContent = matter(fileContent)
-      const content = md.render(processedContent.content)
-
-      await createHtml(content, { config, page, data: processedContent.data })
+      await parseMarkdownFile(page, config);
     })
   )
 
