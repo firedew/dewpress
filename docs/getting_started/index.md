@@ -15,7 +15,7 @@ npm install -D dewpress
 You may also install it globally to be used as a CLI anywhere. This is not the recommended way, it is generally better
 to keep your dependencies local to your project to allow for separate upgrades per project.
 ```bash
-npm i -g dewpress
+npm install -g dewpress
 ```
 
 ## Minimal setup

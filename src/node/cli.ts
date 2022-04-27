@@ -2,12 +2,22 @@ import { Command } from 'commander'
 import { build } from './build'
 import { preview } from './preview'
 import { defaultDewConfig } from './config/defaults'
+import { dev } from './dev'
 
 const program = new Command()
 
 program
   .name('dewpress')
   .version(require('../../package.json').version)
+
+program
+  .command('dev [srcDir]')
+  .description(`develop website, srcDir defaults to ${defaultDewConfig.srcDir}`)
+  .action(async (srcDir: string) => {
+    const server = await dev(srcDir)
+    await server.listen()
+    await server.printUrls()
+  });
 
 program
   .command('build [srcDir]')

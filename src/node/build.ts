@@ -1,18 +1,19 @@
 import MarkdownIt from 'markdown-it'
 import fs from 'fs-extra'
 import { resolve } from 'path'
-import { globby } from 'globby'
 import colors from 'picocolors'
 import createHtml from './createHtml'
 import log from './utils/log'
 import matter from 'gray-matter'
 import { resolveConfig } from './config/config'
 import { copyAssets } from './assets'
+import { getPages } from './pages'
 
 export async function build (root: string) {
   const start = Date.now()
   log.version();
   const config = await resolveConfig(root, 'build', 'development')
+  const pages = await getPages(config)
 
   console.log(`Building from source: ${config.srcDir} to ${config.outDir}`)
 
@@ -20,12 +21,6 @@ export async function build (root: string) {
     html: true,
     linkify: true,
   })
-
-  const pages = (
-    await globby(['**.md'], {
-      cwd: config.srcDir,
-    })
-  ).sort()
 
   await Promise.all(
     pages.map(async (page) => {

@@ -12,6 +12,7 @@
     "build-prepare": "rimraf -rf dist",
     "build-node": "rollup -c scripts/rollup.config.js",
     "docs": "node ./dist/node/cli.js build docs",
+    "docs-dev": "node ./dist/node/cli.js dev docs",
     "docs-preview": "node ./dist/node/cli.js preview docs",
     "test": "jest"
   },
