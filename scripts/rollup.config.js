@@ -17,7 +17,10 @@ export default defineConfig({
   },
   plugins: [
     commonjs(),
-    nodeResolve(),
+    nodeResolve({
+      preferBuiltins: true,
+      extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx']
+    }),
     esbuild({
       target: 'node12'
     }),

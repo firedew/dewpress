@@ -45,3 +45,7 @@ export declare interface DewUserConfig {
    */
   head?: DewHeadOptions
 }
+
+export declare interface DewSiteConfig extends DewUserConfig {
+  configPath?: string
+}

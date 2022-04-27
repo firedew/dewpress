@@ -8,10 +8,13 @@
   "scripts": {
     "dewpress": "node ./dist/node/cli.js",
     "dev-node": "rollup -w -c scripts/rollup.config.js",
-    "build": "run-s build-prepare build-node",
+    "dev-client": "tsc -w -p src/client",
+    "build": "run-s build-prepare build-node build-client",
     "build-prepare": "rimraf -rf dist",
     "build-node": "rollup -c scripts/rollup.config.js",
+    "build-client": "tsc -p src/client",
     "docs": "node ./dist/node/cli.js build docs",
+    "docs-dev": "node ./dist/node/cli.js dev docs",
     "docs-preview": "node ./dist/node/cli.js preview docs",
     "test": "jest"
   },

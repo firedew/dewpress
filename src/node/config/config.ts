@@ -6,7 +6,7 @@ import {
   loadConfigFromFile
 } from 'vite'
 import log from '../utils/log'
-import { DewUserConfig } from '../types'
+import { DewSiteConfig, DewUserConfig } from '../types'
 import { defaultDewConfig } from './defaults'
 
 const resolve = (root: string, file: string) =>
@@ -55,8 +55,8 @@ export async function resolveConfig(
   root: string = process.cwd(),
   command: 'serve' | 'build' = 'serve',
   mode = 'development'
-): Promise<DewUserConfig> {
-  const [userConfig] = await resolveUserConfig(root, command, mode);
+): Promise<DewSiteConfig> {
+  const [userConfig, configPath] = await resolveUserConfig(root, command, mode);
   userConfig.srcDir = path.resolve(root, userConfig.srcDir || '.')
   userConfig.outDir = userConfig.outDir
     ? path.resolve(root, userConfig.outDir)
@@ -64,7 +64,8 @@ export async function resolveConfig(
 
   return {
     ...defaultDewConfig,
-    ...userConfig
+    ...userConfig,
+    configPath,
   }
 }
 
