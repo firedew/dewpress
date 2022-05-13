@@ -59,7 +59,7 @@
     "globby": "13.1.1",
     "gray-matter": "4.0.3",
     "jest": "28.1.0",
-    "markdown-it": "13.0.0",
+    "markdown-it": "13.0.1",
     "npm-run-all": "4.1.5",
     "picocolors": "1.0.0",
     "rimraf": "3.0.2",
