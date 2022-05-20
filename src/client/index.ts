@@ -1,3 +1,5 @@
+import { createRouter, pathToFile } from './router'
+
 console.log('Client is loaded')
 
 function handleHMR(): void {
@@ -24,3 +26,7 @@ function shouldHotReload(payload: any): boolean {
 }
 
 handleHMR();
+createRouter((path) => {
+  let pageFilePath = pathToFile(path)
+  return import(/*@vite-ignore*/ pageFilePath)
+})

@@ -4,12 +4,26 @@ export interface DewPreviewOptions extends PreviewOptions {
   skipOpen?: boolean
 }
 
+export interface DewHeadLink {
+  rel: string
+  href: string
+  as?: string
+  crossorigin?: string | boolean
+  integrity?: string
+  nonce?: string
+  noModule?: boolean
+  type?: string
+  sizes?: string
+  referrerPolicy?: string
+  [key: string]: any
+}
+
 export interface DewHeadOptions {
   /**
    * Website raw head content. This value will be added to as is in the <head> on each generated page.
    * @default empty
    */
-  raw?: string
+  links?: DewHeadLink[]
 }
 
 export declare interface DewUserConfig {
