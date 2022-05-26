@@ -17,7 +17,7 @@ There will be two options to use DewPress:
 1. As a cli (uses Vite under the hood)
 2. As a Vite plugin
 
-Both are valid options and will be fully supported. Including the option to move from one option to another at a later stage
+Both are valid options and will be fully supported. Including the possibility to move from one option to another at a later stage
 if desired.
 
 ### Why would you choose one above the other?

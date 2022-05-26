@@ -1,8 +1,8 @@
 import { Command } from 'commander'
 import { build } from './build'
 import { preview } from './preview'
-import { defaultDewConfig } from './config/defaults'
 import { dev } from './dev'
+import { defaultDewConfig } from './config/defaults'
 
 const program = new Command()
 
@@ -16,7 +16,7 @@ program
   .action(async (srcDir: string) => {
     const server = await dev(srcDir)
     await server.listen()
-    await server.printUrls()
+    server.printUrls()
   });
 
 program
