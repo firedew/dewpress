@@ -17,7 +17,7 @@ There will be two options to use DewPress:
 1. As a cli (uses Vite under the hood)
 2. As a Vite plugin
 
-Both are valid options and will be fully supported. Including the option to move from one option to another at a later stage
+Both are valid options and will be fully supported. Including the possibility to move from one option to another at a later stage
 if desired.
 
 ### Why would you choose one above the other?
@@ -28,5 +28,5 @@ There is no need to pick up the learning curve of using Vite (although we do enc
 In some cases you may already have a Vite project or you may wish to use other utilities of Vite. 
 For this scenario we provide access to the DewPress Vite plugin to include in your Vite config.
 
-[Getting started](/getting_started)
-[About](/about)
+[Getting started](/getting_started/)
+[About](/about/)
