@@ -20,7 +20,7 @@ npm install -g dewpress
 ```
 
 ## Minimal setup
-Currently this setup is the only one DewPress supports. Newer features will be added weekly so make sure to
+Currently this setup is the only one DewPress supports. Newer features will be added frequently so make sure to
 check in regularly if you like this project and want to see more!
 
 With this setup DewPress will do a simple transformation of Markdown files into static html files. The routing

@@ -1,9 +1,22 @@
 import MarkdownIt from 'markdown-it'
+import markdownItAttrs from 'markdown-it-attrs'
+import markdownItContainer from 'markdown-it-container'
 import matter from 'gray-matter'
+import Token from 'markdown-it/lib/token'
+import { renderTagAttributes } from './renderUtils'
+
 
 const md = MarkdownIt({
   html: true,
   linkify: true,
+});
+
+md.use(markdownItAttrs);
+md.use(markdownItContainer, 'div', {
+  render: (tokens: Token[], idx: number) => {
+    const token = tokens[idx];
+    return token.nesting === 1 ? `<div${renderTagAttributes(token.info)}>\n` : `</div>\n`;
+  }
 })
 
 md.renderer.rules.heading_open = (tokens, idx) => {

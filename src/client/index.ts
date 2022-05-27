@@ -21,12 +21,12 @@ function handleHMR(): void {
 function shouldHotReload(payload: any): boolean {
   const payloadPath = payload.path.replace(/(\bindex)?\.md$/, '')
   const locationPath = location.pathname.replace(/(\bindex)?\.html$/, '')
-
-  return payloadPath === locationPath
+  return payloadPath === locationPath || payloadPath.includes('partials')
 }
 
 handleHMR();
 createRouter((path) => {
   let pageFilePath = pathToFile(path)
+  console.log('loading', pageFilePath)
   return import(/*@vite-ignore*/ pageFilePath)
 })
