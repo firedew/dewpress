@@ -43,7 +43,7 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
-    "vite": "2.9.9"
+    "vite": "2.9.13"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "22.0.1",
