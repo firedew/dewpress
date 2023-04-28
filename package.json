@@ -53,7 +53,7 @@
     "@types/jest": "29.5.1",
     "@types/markdown-it": "12.2.3",
     "chokidar": "3.5.3",
-    "commander": "9.5.0",
+    "commander": "10.0.1",
     "esbuild": "0.17.18",
     "fs-extra": "11.1.1",
     "globby": "13.1.4",
