@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # DewPress
 
 Welcome to DewPress, the Jamstack inspired Static Site Generator based on Vite and Markdown.
@@ -28,5 +32,4 @@ There is no need to pick up the learning curve of using Vite (although we do enc
 In some cases you may already have a Vite project or you may wish to use other utilities of Vite. 
 For this scenario we provide access to the DewPress Vite plugin to include in your Vite config.
 
-[Getting started](/getting_started/)
-[About](/about/)
+

@@ -1,5 +1,6 @@
 ---
 title: Getting started
+layout: default
 ---
 # Getting started
 Install DewPress as a npm dependency.
@@ -19,7 +20,7 @@ npm install -g dewpress
 ```
 
 ## Minimal setup
-Currently this setup is the only one DewPress supports. Newer features will be added weekly so make sure to
+Currently this setup is the only one DewPress supports. Newer features will be added frequently so make sure to
 check in regularly if you like this project and want to see more!
 
 With this setup DewPress will do a simple transformation of Markdown files into static html files. The routing
@@ -129,5 +130,3 @@ This should open your default browser and show you the content of your root inde
 DewPress does not yet support hot reload, but this will be enabled in future releases. For now you will
 need to build again on changes and refresh in the browser. The `preview` command will keep the server open, so
 you only need to run this once. But you do need to refresh the page after each `build` command.
-
-[Home](/)

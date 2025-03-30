@@ -1,12 +1,12 @@
 import { Plugin } from 'vite'
 import { DewSiteConfig } from './types'
-import parseMarkdownFile from './markdown/parseMarkdownFile'
 import fs from 'fs-extra'
 import path from 'path'
 import renderMarkdown from './markdown/renderMarkdown'
 import createHtmlHead from './createHtmlHead'
+import parseLayout from './layouts/parseLayout'
 
-export default function dewPressPlugin(
+export default function dewPressPlugin (
   root: string,
   config: DewSiteConfig,
 ): Plugin {
@@ -14,15 +14,17 @@ export default function dewPressPlugin(
   return {
     name: 'dewpress',
 
-    async transform(code, id) {
+    async transform (code, id) {
       console.log('transform', id)
       if (id.endsWith('.md')) {
-        return Promise.resolve(`export default ${JSON.stringify(renderMarkdown(code))}`);
+        let { content, data } = renderMarkdown(code)
+        content = await parseLayout(content, { config, data })
+        return Promise.resolve(`export default ${JSON.stringify({ content, data })}`)
       }
 
       return Promise.resolve(code)
     },
-    configureServer(server) {
+    configureServer (server) {
       if (config.configPath) {
         server.watcher.add(config.configPath)
       }
@@ -33,7 +35,7 @@ export default function dewPressPlugin(
         server.middlewares.use(async (req, res, next) => {
           console.log('server request', req.originalUrl)
           // Check if the request is a page
-          const page = `${req.originalUrl}/index.md`;
+          const page = `${req.originalUrl}/index.md`
           const isPage = fs.existsSync(`${config.srcDir}/${page}`)
           if (req.url!.endsWith('.html') || isPage) {
             // server.watcher.add(page)
@@ -57,7 +59,7 @@ export default function dewPressPlugin(
         })
       }
     },
-    async handleHotUpdate(ctx) {
+    async handleHotUpdate (ctx) {
       // handle config hmr
       const { file, read, server } = ctx
       console.log('hot update', file)
@@ -108,6 +110,6 @@ export default function dewPressPlugin(
   }
 }
 
-function slash(p: string): string {
+function slash (p: string): string {
   return p.replace(/\\/g, '/')
 }
