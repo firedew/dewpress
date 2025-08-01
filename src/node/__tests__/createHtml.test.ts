@@ -1,8 +1,6 @@
 import createHtml from '../createHtml'
 import * as fsExtra from 'fs-extra'
 
-jest.mock('path')
-jest.mock('fs')
 jest.mock('fs-extra', () => ({
   ensureDir: jest.fn(),
   writeFile: jest.fn(),
