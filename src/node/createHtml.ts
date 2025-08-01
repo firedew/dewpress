@@ -1,5 +1,6 @@
-import path from 'path'
-import fs from 'fs-extra'
+import * as path from 'node:path'
+import * as fs from 'fs'
+import * as fsExtra from 'fs-extra'
 import createHtmlHead from './createHtmlHead'
 
 const baseTemplate = fs.readFileSync(path.join(__dirname, './templates/index.html'), { encoding: 'utf-8' })
@@ -12,8 +13,8 @@ export default async function (content: string, { config, page, data, template }
     .replace(/\${content}/g, content)
 
   const htmlFileName = path.join(config.outDir, page.replace(/\.md$/, '.html'))
-  await fs.ensureDir(path.dirname(htmlFileName))
-  await fs.writeFile(htmlFileName, html)
+  await fsExtra.ensureDir(path.dirname(htmlFileName))
+  await fsExtra.writeFile(htmlFileName, html)
 
   return html;
 }
