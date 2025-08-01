@@ -7,7 +7,7 @@ import json from '@rollup/plugin-json'
 import copy from 'rollup-plugin-copy'
 
 const resolveFromRoot = (path) => resolve(new URL('../', import.meta.url).pathname, path)
-import pkg from '../package.json' assert { type: 'json' }
+import pkg from '../package.json' with { type: 'json' }
 
 export default defineConfig({
   input: [resolveFromRoot('src/node/cli.ts')],
