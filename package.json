@@ -54,7 +54,7 @@
     "@types/markdown-it": "14.1.2",
     "chokidar": "4.0.3",
     "commander": "14.0.2",
-    "esbuild": "0.25.8",
+    "esbuild": "0.28.2",
     "fs-extra": "11.3.0",
     "globby": "13.2.2",
     "gray-matter": "4.0.3",
