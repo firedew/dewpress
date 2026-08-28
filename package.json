@@ -63,7 +63,7 @@
     "npm-run-all2": "8.0.4",
     "picocolors": "1.1.1",
     "rimraf": "6.0.1",
-    "rollup": "4.46.2",
+    "rollup": "4.63.1",
     "rollup-plugin-copy": "3.5.0",
     "rollup-plugin-esbuild": "6.2.1",
     "ts-jest": "29.4.0",
