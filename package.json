@@ -58,7 +58,7 @@
     "fs-extra": "11.3.0",
     "globby": "13.2.2",
     "gray-matter": "4.0.3",
-    "jest": "30.0.5",
+    "jest": "30.5.1",
     "markdown-it": "14.1.0",
     "npm-run-all2": "8.0.4",
     "picocolors": "1.1.1",
